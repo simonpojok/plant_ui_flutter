@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plant/constants.dart';
 
@@ -10,14 +11,18 @@ class Body extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          buildHomeWithSearchContainer(size, context)
+          buildHomeWithSearchContainer(size, context),
+          TitleWithMoreButton(text: "More", press: () {},),
+          RecommendedPlantCard(size: size),
         ],
       ),
     );
   }
-
   Container buildHomeWithSearchContainer(Size size, BuildContext context) {
     return Container(
+        margin: EdgeInsets.only(
+          bottom: kDefaultPadding * 0.5
+        ),
         height: size.height * 0.2,
         child: Stack(
           children: [
@@ -92,5 +97,156 @@ class Body extends StatelessWidget {
           ],
         ),
       );
+  }
+}
+
+class RecommendedPlantCard extends StatelessWidget {
+  const RecommendedPlantCard({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        left: kDefaultPadding,
+        top: kDefaultPadding / 2,
+        bottom: kDefaultPadding * 2.5
+      ),
+      width: size.width * 0.4,
+      child: Column(
+        children: [
+          Image.asset("assets/images/image_1.png"),
+          Container(
+            padding: EdgeInsets.all(kDefaultPadding / 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10)
+              ),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  offset: Offset(0, 10),
+                  blurRadius: 50,
+                  color: kPrimaryColor.withOpacity(0.23)
+                )
+              ]
+            ),
+            child: Row(
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "Samantha\n".toUpperCase(),
+                        style: Theme.of(context).textTheme.button
+                      ),
+                      TextSpan(
+                        text: "Russia".toUpperCase(),
+                        style: TextStyle(
+                          color: kPrimaryColor.withOpacity(0.5)
+                        )
+                      ),
+                    ]
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  "\$440",
+                  style: Theme.of(context).textTheme.button.copyWith(
+                      color: kPrimaryColor
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TitleWithMoreButton extends StatelessWidget {
+  const TitleWithMoreButton({
+    Key key,
+    this.text,
+    this.press
+  }) : super(key: key);
+  final String text;
+  final Function press;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: kDefaultPadding
+      ),
+      child: Row(
+        children: [
+          TitleWithCustomUnderline(
+            text: "Recommended",
+          ),
+          Spacer(),
+          FlatButton(
+              color: kPrimaryColor,
+              onPressed: press,
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: Colors.white
+                ),
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20)
+              ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class TitleWithCustomUnderline extends StatelessWidget {
+  const TitleWithCustomUnderline({
+    Key key,
+    this.text
+  }) : super(key: key);
+
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 24,
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: kDefaultPadding / 4),
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              margin: EdgeInsets.only(
+                right: kDefaultPadding / 4
+              ),
+              height: 7,
+              color: kPrimaryColor.withOpacity(0.2),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
