@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
         children: [
           buildHomeWithSearchContainer(size, context),
           TitleWithMoreButton(text: "More", press: () {},),
-          RecommendedPlantCard(size: size),
+          RecommendedPlantCard(),
         ],
       ),
     );
@@ -103,13 +103,20 @@ class Body extends StatelessWidget {
 class RecommendedPlantCard extends StatelessWidget {
   const RecommendedPlantCard({
     Key key,
-    @required this.size,
+    this.image,
+    this.title,
+    this.country,
+    this.price,
+    this.press
   }) : super(key: key);
 
-  final Size size;
+  final String image, title, country;
+  final int price;
+  final Function press;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(
         left: kDefaultPadding,
@@ -119,7 +126,7 @@ class RecommendedPlantCard extends StatelessWidget {
       width: size.width * 0.4,
       child: Column(
         children: [
-          Image.asset("assets/images/image_1.png"),
+          Image.asset(image),
           Container(
             padding: EdgeInsets.all(kDefaultPadding / 2),
             decoration: BoxDecoration(
@@ -142,11 +149,11 @@ class RecommendedPlantCard extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Samantha\n".toUpperCase(),
+                        text: title + "\n".toUpperCase(),
                         style: Theme.of(context).textTheme.button
                       ),
                       TextSpan(
-                        text: "Russia".toUpperCase(),
+                        text: country.toUpperCase(),
                         style: TextStyle(
                           color: kPrimaryColor.withOpacity(0.5)
                         )
@@ -156,7 +163,7 @@ class RecommendedPlantCard extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  "\$440",
+                  "\$"+ price.toString(),
                   style: Theme.of(context).textTheme.button.copyWith(
                       color: kPrimaryColor
                   ),
