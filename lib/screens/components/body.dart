@@ -13,7 +13,12 @@ class Body extends StatelessWidget {
         children: [
           buildHomeWithSearchContainer(size, context),
           TitleWithMoreButton(text: "More", press: () {},),
-          RecommendedPlantCard(),
+          RecommendedPlantCard(
+            image: "assets/images/image_1.png",
+            title: "Samantha",
+            country: "Russia",
+            press: () {},
+          ),
         ],
       ),
     );
