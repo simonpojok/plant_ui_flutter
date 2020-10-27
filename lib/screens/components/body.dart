@@ -127,48 +127,51 @@ class RecommendedPlantCard extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(image),
-          Container(
-            padding: EdgeInsets.all(kDefaultPadding / 2),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(10),
-                bottomRight: Radius.circular(10)
-              ),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 10),
-                  blurRadius: 50,
-                  color: kPrimaryColor.withOpacity(0.23)
-                )
-              ]
-            ),
-            child: Row(
-              children: [
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: title + "\n".toUpperCase(),
-                        style: Theme.of(context).textTheme.button
-                      ),
-                      TextSpan(
-                        text: country.toUpperCase(),
-                        style: TextStyle(
-                          color: kPrimaryColor.withOpacity(0.5)
-                        )
-                      ),
-                    ]
-                  ),
+          GestureDetector(
+            onTap: press,
+            child: Container(
+              padding: EdgeInsets.all(kDefaultPadding / 2),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10)
                 ),
-                Spacer(),
-                Text(
-                  "\$"+ price.toString(),
-                  style: Theme.of(context).textTheme.button.copyWith(
-                      color: kPrimaryColor
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 10),
+                    blurRadius: 50,
+                    color: kPrimaryColor.withOpacity(0.23)
+                  )
+                ]
+              ),
+              child: Row(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: title + "\n".toUpperCase(),
+                          style: Theme.of(context).textTheme.button
+                        ),
+                        TextSpan(
+                          text: country.toUpperCase(),
+                          style: TextStyle(
+                            color: kPrimaryColor.withOpacity(0.5)
+                          )
+                        ),
+                      ]
+                    ),
                   ),
-                )
-              ],
+                  Spacer(),
+                  Text(
+                    "\$"+ price.toString(),
+                    style: Theme.of(context).textTheme.button.copyWith(
+                        color: kPrimaryColor
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],
