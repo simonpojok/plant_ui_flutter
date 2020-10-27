@@ -13,11 +13,33 @@ class Body extends StatelessWidget {
         children: [
           buildHomeWithSearchContainer(size, context),
           TitleWithMoreButton(text: "More", press: () {},),
-          RecommendedPlantCard(
-            image: "assets/images/image_1.png",
-            title: "Samantha",
-            country: "Russia",
-            press: () {},
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                RecommendedPlantCard(
+                  image: "assets/images/image_1.png",
+                  title: "Samantha",
+                  country: "Russia",
+                  price: 440,
+                  press: () {},
+                ),
+                RecommendedPlantCard(
+                  image: "assets/images/image_1.png",
+                  title: "Samantha",
+                  country: "Russia",
+                  price: 440,
+                  press: () {},
+                ),
+                RecommendedPlantCard(
+                  image: "assets/images/image_1.png",
+                  title: "Samantha",
+                  country: "Russia",
+                  price: 440,
+                  press: () {},
+                ),
+              ],
+            ),
           ),
         ],
       ),
